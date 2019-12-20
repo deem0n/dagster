@@ -611,7 +611,7 @@ def _create_output_materializations(step_context, output_name, value):
 
 def _user_event_sequence_for_step_compute_fn(step_context, evaluated_inputs):
     check.inst_param(step_context, 'step_context', SystemStepExecutionContext)
-    check.dict_param(evaluated_inputs, 'evaluated_inputs', key_type=str)
+    check.dict_param(evaluated_inputs, 'evaluated_inputs', key_type=check.string_types)
 
     with user_code_error_boundary(
         DagsterExecutionStepExecutionError,

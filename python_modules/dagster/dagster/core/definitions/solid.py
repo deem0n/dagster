@@ -20,7 +20,7 @@ class ISolidDefinition(six.with_metaclass(ABCMeta)):
     def __init__(self, name, input_defs, output_defs, description=None, metadata=None):
         self._name = check_valid_name(name)
         self._description = check.opt_str_param(description, 'description')
-        self._metadata = check.opt_dict_param(metadata, 'metadata', key_type=str)
+        self._metadata = check.opt_dict_param(metadata, 'metadata', key_type=check.string_types)
         self._input_defs = frozenlist(input_defs)
         self._input_dict = frozendict({input_def.name: input_def for input_def in input_defs})
         check.invariant(len(self._input_defs) == len(self._input_dict), 'Duplicate input def names')

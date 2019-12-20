@@ -77,7 +77,9 @@ class Manager(object):
         '''
         check.opt_str_param(output_log_path, 'output_log_path')
         check.opt_str_param(marshal_dir, 'marshal_dir')
-        environment_dict = check.opt_dict_param(environment_dict, 'environment_dict', key_type=str)
+        environment_dict = check.opt_dict_param(
+            environment_dict, 'environment_dict', key_type=check.string_types
+        )
         check.dict_param(pipeline_run_dict, 'pipeline_run_dict')
         check.dict_param(handle_kwargs, 'handle_kwargs')
         check.opt_list_param(solid_subset, 'solid_subset', of_type=str)
@@ -154,7 +156,9 @@ class Manager(object):
             :class:`dagstermill.DagstermillExecutionContext`
         '''
         check.opt_inst_param(mode_def, 'mode_def', ModeDefinition)
-        environment_dict = check.opt_dict_param(environment_dict, 'environment_dict', key_type=str)
+        environment_dict = check.opt_dict_param(
+            environment_dict, 'environment_dict', key_type=check.string_types
+        )
 
         solid_def = SolidDefinition(
             name='this_solid',

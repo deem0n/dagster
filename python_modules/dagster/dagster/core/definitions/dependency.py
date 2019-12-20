@@ -218,7 +218,7 @@ class SolidHandle(namedtuple('_SolidHandle', 'name definition_name parent')):
         '''This method makes it possible to rehydrate a potentially nested SolidHandle after a
         roundtrip through json.loads(json.dumps(SolidHandle._asdict()))'''
 
-        check.dict_param(dict_repr, 'dict_repr', key_type=str)
+        check.dict_param(dict_repr, 'dict_repr', key_type=check.string_types)
         check.invariant(
             'name' in dict_repr, 'Dict representation of SolidHandle must have a \'name\' key'
         )
@@ -321,7 +321,7 @@ class InputToOutputHandleDict(defaultdict):
 
 
 def _create_handle_dict(solid_dict, dep_dict):
-    check.dict_param(solid_dict, 'solid_dict', key_type=str, value_type=Solid)
+    check.dict_param(solid_dict, 'solid_dict', key_type=check.string_types, value_type=Solid)
     check.two_dim_dict_param(dep_dict, 'dep_dict', value_type=IDependencyDefinition)
 
     handle_dict = InputToOutputHandleDict()

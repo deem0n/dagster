@@ -88,7 +88,7 @@ def event_metadata_entries(metadata_entry_datas):
 
 
 def dagster_event_from_dict(event_dict, pipeline_name):
-    check.dict_param(event_dict, 'event_dict', key_type=str)
+    check.dict_param(event_dict, 'event_dict', key_type=check.string_types)
     check.str_param(pipeline_name, 'pipeline_name')
 
     # Get event_type

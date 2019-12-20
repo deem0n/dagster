@@ -69,7 +69,7 @@ def _execute_core_compute(compute_context, inputs, compute_fn):
     all relevant logging and metrics tracking
     '''
     check.inst_param(compute_context, 'compute_context', SystemComputeExecutionContext)
-    check.dict_param(inputs, 'inputs', key_type=str)
+    check.dict_param(inputs, 'inputs', key_type=check.string_types)
 
     step = compute_context.step
 

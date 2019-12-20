@@ -121,7 +121,7 @@ def scoped_pipeline_context(
     raise_on_error=False,
 ):
     check.inst_param(pipeline_def, 'pipeline_def', PipelineDefinition)
-    check.dict_param(environment_dict, 'environment_dict', key_type=str)
+    check.dict_param(environment_dict, 'environment_dict', key_type=check.string_types)
     check.inst_param(pipeline_run, 'pipeline_run', PipelineRun)
     check.inst_param(instance, 'instance', DagsterInstance)
     check.opt_inst_param(system_storage_data, 'system_storage_data', SystemStorageData)

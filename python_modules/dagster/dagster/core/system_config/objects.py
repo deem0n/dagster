@@ -14,13 +14,13 @@ class SolidConfig(namedtuple('_SolidConfig', 'config inputs outputs')):
         return super(SolidConfig, cls).__new__(
             cls,
             config,
-            check.opt_dict_param(inputs, 'inputs', key_type=str),
+            check.opt_dict_param(inputs, 'inputs', key_type=check.string_types),
             check.opt_list_param(outputs, 'outputs', of_type=dict),
         )
 
     @staticmethod
     def from_dict(config):
-        check.dict_param(config, 'config', key_type=str)
+        check.dict_param(config, 'config', key_type=check.string_types)
 
         return SolidConfig(
             config=config.get('config'),
@@ -46,18 +46,22 @@ class EnvironmentConfig(
         check.opt_inst_param(execution, 'execution', ExecutionConfig)
         check.opt_inst_param(storage, 'storage', StorageConfig)
         check.opt_dict_param(original_config_dict, 'original_config_dict')
-        check.opt_dict_param(resources, 'resources', key_type=str)
+        check.opt_dict_param(resources, 'resources', key_type=check.string_types)
 
         if execution is None:
             execution = ExecutionConfig(None, None)
 
         return super(EnvironmentConfig, cls).__new__(
             cls,
-            solids=check.opt_dict_param(solids, 'solids', key_type=str, value_type=SolidConfig),
+            solids=check.opt_dict_param(
+                solids, 'solids', key_type=check.string_types, value_type=SolidConfig
+            ),
             execution=execution,
             storage=storage,
             resources=resources,
-            loggers=check.opt_dict_param(loggers, 'loggers', key_type=str, value_type=dict),
+            loggers=check.opt_dict_param(
+                loggers, 'loggers', key_type=check.string_types, value_type=dict
+            ),
             original_config_dict=original_config_dict,
         )
 
@@ -111,7 +115,7 @@ class ExecutionConfig(
 
     @staticmethod
     def from_dict(config=None):
-        check.opt_dict_param(config, 'config', key_type=str)
+        check.opt_dict_param(config, 'config', key_type=check.string_types)
         if config:
             execution_engine_name, execution_engine_config = ensure_single_item(config)
             return ExecutionConfig(execution_engine_name, execution_engine_config.get('config'))
@@ -132,7 +136,7 @@ class StorageConfig(namedtuple('_FilesConfig', 'system_storage_name system_stora
 
     @staticmethod
     def from_dict(config=None):
-        check.opt_dict_param(config, 'config', key_type=str)
+        check.opt_dict_param(config, 'config', key_type=check.string_types)
         if config:
             system_storage_name, system_storage_config = ensure_single_item(config)
             return StorageConfig(system_storage_name, system_storage_config.get('config'))

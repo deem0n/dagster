@@ -46,7 +46,7 @@ def post_process_config_to_selector(selector_type, config_value):
 
 def post_process_dict_config(dict_type, config_value):
     check.param_invariant(dict_type.is_dict, 'dict_type')
-    config_value = check.opt_dict_param(config_value, 'config_value', key_type=str)
+    config_value = check.opt_dict_param(config_value, 'config_value', key_type=check.string_types)
 
     fields = dict_type.fields
     incoming_fields = set(config_value.keys())

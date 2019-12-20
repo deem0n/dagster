@@ -144,7 +144,9 @@ class DagsterDockerOperator(ModifiedDockerOperator):
     ):
         check.str_param(pipeline_name, 'pipeline_name')
         step_keys = check.opt_list_param(step_keys, 'step_keys', of_type=str)
-        environment_dict = check.opt_dict_param(environment_dict, 'environment_dict', key_type=str)
+        environment_dict = check.opt_dict_param(
+            environment_dict, 'environment_dict', key_type=check.string_types
+        )
         check.opt_inst_param(instance_ref, 'instance_ref', InstanceRef)
 
         tmp_dir = kwargs.pop('tmp_dir', DOCKER_TEMPDIR)

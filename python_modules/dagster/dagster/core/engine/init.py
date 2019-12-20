@@ -37,5 +37,7 @@ class InitExecutorContext(
             environment_config=check.inst_param(
                 environment_config, 'environment_config', EnvironmentConfig
             ),
-            executor_config=check.dict_param(executor_config, executor_config, key_type=str),
+            executor_config=check.dict_param(
+                executor_config, executor_config, key_type=check.string_types
+            ),
         )

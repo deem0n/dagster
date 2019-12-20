@@ -42,7 +42,9 @@ def _is_selector_field_optional(config_type):
 
 
 def define_resource_dictionary_cls(resource_defs):
-    check.dict_param(resource_defs, 'resource_defs', key_type=str, value_type=ResourceDefinition)
+    check.dict_param(
+        resource_defs, 'resource_defs', key_type=check.string_types, value_type=ResourceDefinition
+    )
 
     fields = {}
     for resource_name, resource_def in resource_defs.items():
@@ -84,7 +86,7 @@ class EnvironmentClassCreationData(
             ),
             mode_definition=check.inst_param(mode_definition, 'mode_definition', ModeDefinition),
             logger_defs=check.dict_param(
-                logger_defs, 'logger_defs', key_type=str, value_type=LoggerDefinition
+                logger_defs, 'logger_defs', key_type=check.string_types, value_type=LoggerDefinition
             ),
         )
 

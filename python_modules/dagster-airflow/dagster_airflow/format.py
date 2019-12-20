@@ -6,7 +6,7 @@ def format_dict_for_graphql(dict_):
     '''This recursive descent thing formats a dict for GraphQL.'''
 
     def _format_subdict(dict_, current_indent=0):
-        check.dict_param(dict_, 'dict_', key_type=str)
+        check.dict_param(dict_, 'dict_', key_type=check.string_types)
 
         printer = IndentingStringIoPrinter(indent_level=2, current_indent=current_indent)
         printer.line('{')
@@ -64,7 +64,7 @@ def format_dict_for_graphql(dict_):
         else:
             return repr(dict_).replace('\'', '"')
 
-    check.dict_param(dict_, 'dict_', key_type=str)
+    check.dict_param(dict_, 'dict_', key_type=check.string_types)
     if not isinstance(dict_, dict):
         check.failed('Expected a dict to format, got: {item}'.format(item=repr(dict_)))
 

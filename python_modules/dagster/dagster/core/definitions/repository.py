@@ -28,7 +28,9 @@ class RepositoryDefinition(object):
     def __init__(self, name, pipeline_dict=None, pipeline_defs=None):
         self._name = check.str_param(name, 'name')
 
-        pipeline_dict = check.opt_dict_param(pipeline_dict, 'pipeline_dict', key_type=str)
+        pipeline_dict = check.opt_dict_param(
+            pipeline_dict, 'pipeline_dict', key_type=check.string_types
+        )
         pipeline_defs = check.opt_list_param(pipeline_defs, 'pipeline_defs', PipelineDefinition)
 
         for val in pipeline_dict.values():

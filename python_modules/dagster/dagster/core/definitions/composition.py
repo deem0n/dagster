@@ -257,9 +257,12 @@ class InvokedSolidNode(
             cls,
             check.str_param(solid_name, 'solid_name'),
             check.inst_param(solid_def, 'solid_def', ISolidDefinition),
-            check.dict_param(input_bindings, 'input_bindings', key_type=str),
+            check.dict_param(input_bindings, 'input_bindings', key_type=check.string_types),
             check.dict_param(
-                input_mappings, 'input_mappings', key_type=str, value_type=InputMappingNode
+                input_mappings,
+                'input_mappings',
+                key_type=check.string_types,
+                value_type=InputMappingNode,
             ),
         )
 
