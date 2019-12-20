@@ -74,12 +74,12 @@ class ScheduleDefinition(object):
         check.str_param(pipeline_name, 'pipeline_name')
         check.opt_dict_param(environment_dict, 'environment_dict')
         check.opt_callable_param(environment_dict_fn, 'environment_dict_fn')
-        check.opt_dict_param(tags, 'tags', key_type=str, value_type=str)
+        check.opt_dict_param(tags, 'tags', key_type=check.string_types, value_type=check.string_types)
         check.opt_callable_param(tags_fn, 'tags_fn')
         check.opt_nullable_list_param(solid_subset, 'solid_subset', of_type=str)
         mode = check.opt_str_param(mode, 'mode', DEFAULT_MODE_NAME)
         check.callable_param(should_execute, 'should_execute')
-        check.opt_dict_param(environment_vars, 'environment_vars', key_type=str, value_type=str)
+        check.opt_dict_param(environment_vars, 'environment_vars', key_type=check.string_types, value_type=check.string_types)
 
         if environment_dict_fn and environment_dict:
             raise DagsterInvalidDefinitionError(

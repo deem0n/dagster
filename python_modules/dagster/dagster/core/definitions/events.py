@@ -156,7 +156,7 @@ class JsonMetadataEntryData(namedtuple('_JsonMetadataEntryData', 'data')):
 
     def __new__(cls, data):
         return super(JsonMetadataEntryData, cls).__new__(
-            cls, check.dict_param(data, 'data', key_type=str)
+            cls, check.dict_param(data, 'data', key_type=check.string_types)
         )
 
 

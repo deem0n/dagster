@@ -54,7 +54,7 @@ def check_run_config_param(run_config, pipeline_def):
 
 def create_execution_plan(pipeline, environment_dict=None, run_config=None):
     check.inst_param(pipeline, 'pipeline', PipelineDefinition)
-    environment_dict = check.opt_dict_param(environment_dict, 'environment_dict', key_type=str)
+    environment_dict = check.opt_dict_param(environment_dict, 'environment_dict', key_type=check.string_types)
     run_config = check.opt_inst_param(run_config, 'run_config', IRunConfig, RunConfig())
 
     environment_config = EnvironmentConfig.build(pipeline, environment_dict, run_config)

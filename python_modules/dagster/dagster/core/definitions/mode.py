@@ -46,11 +46,11 @@ class ModeDefinition(object):
 
         self.name = check.opt_str_param(name, 'name', DEFAULT_MODE_NAME)
         self.resource_defs = check.opt_dict_param(
-            resource_defs, 'resource_defs', key_type=str, value_type=ResourceDefinition
+            resource_defs, 'resource_defs', key_type=check.string_types, value_type=ResourceDefinition
         )
         self.loggers = (
             check.opt_dict_param(
-                logger_defs, 'logger_defs', key_type=str, value_type=LoggerDefinition
+                logger_defs, 'logger_defs', key_type=check.string_types, value_type=LoggerDefinition
             )
             or default_loggers()
         )
@@ -76,7 +76,7 @@ class ModeDefinition(object):
 
     @staticmethod
     def from_resources(resources, name=None):
-        check.dict_param(resources, 'resources', key_type=str)
+        check.dict_param(resources, 'resources', key_type=check.string_types)
 
         return ModeDefinition(
             name=name,

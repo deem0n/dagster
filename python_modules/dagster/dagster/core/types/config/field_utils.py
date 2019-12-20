@@ -69,7 +69,7 @@ class _ConfigHasFields(ConfigType):
     def __init__(self, fields, **kwargs):
         from dagster.core.types.config.field import Field
 
-        self.fields = check.dict_param(fields, 'fields', key_type=str, value_type=Field)
+        self.fields = check.dict_param(fields, 'fields', key_type=check.string_types, value_type=Field)
         super(_ConfigHasFields, self).__init__(**kwargs)
 
     @property
@@ -149,7 +149,7 @@ def coerce_potential_field(potential_field, raise_error_callback):
 
 
 def _process_fields_dict(fields, throw_error_callback):
-    check.dict_param(fields, 'fields', key_type=str)
+    check.dict_param(fields, 'fields', key_type=check.string_types)
     check.callable_param(throw_error_callback, 'throw_error_callback')
 
     return {
@@ -158,7 +158,7 @@ def _process_fields_dict(fields, throw_error_callback):
 
 
 def process_user_facing_fields_dict(fields, type_name_msg):
-    check.dict_param(fields, 'fields', key_type=str)
+    check.dict_param(fields, 'fields', key_type=check.string_types)
     check.str_param(type_name_msg, 'type_name_msg')
 
     return {

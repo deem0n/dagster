@@ -282,9 +282,9 @@ class ExecutionPlan(
             cls,
             pipeline_def=check.inst_param(pipeline_def, 'pipeline_def', PipelineDefinition),
             step_dict=check.dict_param(
-                step_dict, 'step_dict', key_type=str, value_type=ExecutionStep
+                step_dict, 'step_dict', key_type=check.string_types, value_type=ExecutionStep
             ),
-            deps=check.dict_param(deps, 'deps', key_type=str, value_type=set),
+            deps=check.dict_param(deps, 'deps', key_type=check.string_types, value_type=set),
             steps=list(step_dict.values()),
             artifacts_persisted=check.bool_param(artifacts_persisted, 'artifacts_persisted'),
             previous_run_id=check.opt_str_param(previous_run_id, 'previous_run_id'),

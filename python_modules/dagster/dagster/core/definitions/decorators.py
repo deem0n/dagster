@@ -893,12 +893,12 @@ def daily_schedule(
     check.str_param(pipeline_name, 'pipeline_name')
     check.inst_param(start_date, 'start_date', datetime.datetime)
     check.inst_param(execution_time, 'execution_time', datetime.time)
-    check.opt_dict_param(tags, 'tags', key_type=str, value_type=str)
+    check.opt_dict_param(tags, 'tags', key_type=check.string_types, value_type=check.string_types)
     check.opt_callable_param(tags_fn_for_date, 'tags_fn_for_date')
     check.opt_nullable_list_param(solid_subset, 'solid_subset', of_type=str)
     mode = check.opt_str_param(mode, 'mode', DEFAULT_MODE_NAME)
     check.callable_param(should_execute, 'should_execute')
-    check.opt_dict_param(environment_vars, 'environment_vars', key_type=str, value_type=str)
+    check.opt_dict_param(environment_vars, 'environment_vars', key_type=check.string_types, value_type=check.string_types)
 
     cron_schedule = '{minute} {hour} * * *'.format(
         minute=execution_time.minute, hour=execution_time.hour
@@ -949,12 +949,12 @@ def hourly_schedule(
     check.str_param(pipeline_name, 'pipeline_name')
     check.inst_param(start_date, 'start_date', datetime.datetime)
     check.inst_param(execution_time, 'execution_time', datetime.time)
-    check.opt_dict_param(tags, 'tags', key_type=str, value_type=str)
+    check.opt_dict_param(tags, 'tags', key_type=check.string_types, value_type=check.string_types)
     check.opt_callable_param(tags_fn_for_date, 'tags_fn_for_date')
     check.opt_nullable_list_param(solid_subset, 'solid_subset', of_type=str)
     mode = check.opt_str_param(mode, 'mode', DEFAULT_MODE_NAME)
     check.callable_param(should_execute, 'should_execute')
-    check.opt_dict_param(environment_vars, 'environment_vars', key_type=str, value_type=str)
+    check.opt_dict_param(environment_vars, 'environment_vars', key_type=check.string_types, value_type=check.string_types)
 
     if execution_time.hour != 0:
         warnings.warn(

@@ -19,7 +19,7 @@ from .file_manager import S3FileHandle
 
 def dict_with_fields(name, fields):
     check.str_param(name, 'name')
-    check.dict_param(fields, 'fields', key_type=str)
+    check.dict_param(fields, 'fields', key_type=check.string_types)
     field_names = set(fields.keys())
 
     @input_hydration_config(Dict(fields))

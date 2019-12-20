@@ -174,7 +174,7 @@ class PartitionSetDefinition(
         check.str_param(schedule_name, 'schedule_name')
         check.str_param(cron_schedule, 'cron_schedule')
         check.callable_param(should_execute, 'should_execute')
-        check.opt_dict_param(environment_vars, 'environment_vars', key_type=str, value_type=str)
+        check.opt_dict_param(environment_vars, 'environment_vars', key_type=check.string_types, value_type=check.string_types)
         check.inst_param(partition_selector, 'partition_selector', IPartitionSelector)
 
         def _environment_dict_fn_wrapper():

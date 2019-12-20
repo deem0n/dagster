@@ -89,7 +89,7 @@ class PipelineRun(
     ):
         from dagster.core.definitions.pipeline import ExecutionSelector
 
-        tags = check.opt_dict_param(tags, 'tags', key_type=str)
+        tags = check.opt_dict_param(tags, 'tags', key_type=check.string_types)
         selector = check.opt_inst_param(selector, 'selector', ExecutionSelector)
         if not selector:
             selector = ExecutionSelector(pipeline_name)
@@ -111,7 +111,7 @@ class PipelineRun(
             if step_keys_to_execute is None
             else check.list_param(step_keys_to_execute, 'step_keys_to_execute', of_type=str),
             status=status,
-            tags=check.opt_dict_param(tags, 'tags', key_type=str),
+            tags=check.opt_dict_param(tags, 'tags', key_type=check.string_types),
             previous_run_id=check.opt_str_param(previous_run_id, 'previous_run_id'),
         )
 
