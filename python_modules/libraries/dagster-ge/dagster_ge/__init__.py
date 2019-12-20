@@ -2,7 +2,7 @@ from dagster import EventMetadataEntry, ExpectationResult, check
 
 
 def create_expectation_result(label, ge_evr):
-    check.dict_param(ge_evr, 'ge_evr', key_type=str)
+    check.dict_param(ge_evr, 'ge_evr', key_type=check.string_types)
     check.param_invariant('success' in ge_evr, 'ge_evr')
     return ExpectationResult(
         success=ge_evr['success'],

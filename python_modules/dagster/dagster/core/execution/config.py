@@ -75,7 +75,7 @@ class RunConfig(
 
         check.opt_list_param(step_keys_to_execute, 'step_keys_to_execute', of_type=str)
 
-        tags = check.opt_dict_param(tags, 'tags', key_type=str)
+        tags = check.opt_dict_param(tags, 'tags', key_type=check.string_types)
 
         if EXECUTION_TIME_KEY in tags:
             # execution_epoch_time expected to be able to be cast to float

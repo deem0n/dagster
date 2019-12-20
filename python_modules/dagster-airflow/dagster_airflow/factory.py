@@ -58,7 +58,7 @@ def _make_airflow_dag(
 ):
     check.inst_param(handle, 'handle', ExecutionTargetHandle)
     check.str_param(pipeline_name, 'pipeline_name')
-    environment_dict = check.opt_dict_param(environment_dict, 'environment_dict', key_type=str)
+    environment_dict = check.opt_dict_param(environment_dict, 'environment_dict', key_type=check.string_types)
     mode = check.opt_str_param(mode, 'mode')
     # Default to use the (persistent) system temp directory rather than a seven.TemporaryDirectory,
     # which would not be consistent between Airflow task invocations.
@@ -78,10 +78,10 @@ def _make_airflow_dag(
 
     dag_kwargs = dict(
         {'default_args': DEFAULT_ARGS},
-        **check.opt_dict_param(dag_kwargs, 'dag_kwargs', key_type=str)
+        **check.opt_dict_param(dag_kwargs, 'dag_kwargs', key_type=check.string_types)
     )
 
-    op_kwargs = check.opt_dict_param(op_kwargs, 'op_kwargs', key_type=str)
+    op_kwargs = check.opt_dict_param(op_kwargs, 'op_kwargs', key_type=check.string_types)
 
     dag = DAG(dag_id=dag_id, description=dag_description, **dag_kwargs)
 
@@ -275,7 +275,7 @@ def make_airflow_dag_containerized(
 
     handle = ExecutionTargetHandle.for_pipeline_module(module_name, pipeline_name)
 
-    op_kwargs = check.opt_dict_param(op_kwargs, 'op_kwargs', key_type=str)
+    op_kwargs = check.opt_dict_param(op_kwargs, 'op_kwargs', key_type=check.string_types)
     op_kwargs['image'] = image
     return _make_airflow_dag(
         handle=handle,
@@ -301,7 +301,7 @@ def make_airflow_dag_containerized_for_handle(
     dag_kwargs=None,
     op_kwargs=None,
 ):
-    op_kwargs = check.opt_dict_param(op_kwargs, 'op_kwargs', key_type=str)
+    op_kwargs = check.opt_dict_param(op_kwargs, 'op_kwargs', key_type=check.string_types)
     op_kwargs['image'] = image
 
     return _make_airflow_dag(
@@ -332,7 +332,7 @@ def make_airflow_dag_kubernetized_for_handle(
     from .operators.kubernetes_operator import DagsterKubernetesPodOperator
 
     # See: https://github.com/dagster-io/dagster/issues/1663
-    op_kwargs = check.opt_dict_param(op_kwargs, 'op_kwargs', key_type=str)
+    op_kwargs = check.opt_dict_param(op_kwargs, 'op_kwargs', key_type=check.string_types)
     op_kwargs['image'] = image
     op_kwargs['namespace'] = namespace
 

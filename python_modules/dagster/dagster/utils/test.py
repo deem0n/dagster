@@ -50,7 +50,7 @@ from .typing_api import is_typing_type
 def create_test_pipeline_execution_context(logger_defs=None):
     run_id = str(uuid.uuid4())
     loggers = check.opt_dict_param(
-        logger_defs, 'logger_defs', key_type=str, value_type=LoggerDefinition
+        logger_defs, 'logger_defs', key_type=check.string_types, value_type=LoggerDefinition
     )
     mode_def = ModeDefinition(logger_defs=loggers)
     pipeline_def = PipelineDefinition(
@@ -84,7 +84,7 @@ def _dep_key_of(solid):
 
 def build_pipeline_with_input_stubs(pipeline_def, inputs):
     check.inst_param(pipeline_def, 'pipeline_def', PipelineDefinition)
-    check.dict_param(inputs, 'inputs', key_type=str, value_type=dict)
+    check.dict_param(inputs, 'inputs', key_type=check.string_types, value_type=dict)
 
     deps = defaultdict(dict)
     for solid_name, dep_dict in pipeline_def.dependencies.items():
@@ -145,7 +145,7 @@ def execute_solids_within_pipeline(
     '''
     check.inst_param(pipeline_def, 'pipeline_def', PipelineDefinition)
     check.list_param(solid_names, 'solid_names', of_type=str)
-    inputs = check.opt_dict_param(inputs, 'inputs', key_type=str, value_type=dict)
+    inputs = check.opt_dict_param(inputs, 'inputs', key_type=check.string_types, value_type=dict)
     environment_dict = check.opt_dict_param(environment_dict, 'environment_dict')
     run_config = check.opt_inst_param(run_config, 'run_config', RunConfig)
 
@@ -180,7 +180,7 @@ def execute_solid_within_pipeline(
     '''
     check.inst_param(pipeline_def, 'pipeline_def', PipelineDefinition)
     check.str_param(solid_name, 'solid_name')
-    inputs = check.opt_dict_param(inputs, 'inputs', key_type=str)
+    inputs = check.opt_dict_param(inputs, 'inputs', key_type=check.string_types)
     environment_dict = check.opt_dict_param(environment_dict, 'environment')
     run_config = check.opt_inst_param(run_config, 'run_config', RunConfig)
 
@@ -237,7 +237,7 @@ def execute_solid(
     '''
     check.inst_param(solid_def, 'solid_def', ISolidDefinition)
     check.opt_inst_param(mode_def, 'mode_def', ModeDefinition)
-    input_values = check.opt_dict_param(input_values, 'input_values', key_type=str)
+    input_values = check.opt_dict_param(input_values, 'input_values', key_type=check.string_types)
 
     solid_defs = [solid_def]
 

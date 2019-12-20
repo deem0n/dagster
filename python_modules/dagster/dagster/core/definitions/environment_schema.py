@@ -18,13 +18,13 @@ class EnvironmentSchema(
             config_type_dict_by_name=check.dict_param(
                 config_type_dict_by_name,
                 'config_type_dict_by_name',
-                key_type=str,
+                key_type=check.string_types,
                 value_type=ConfigType,
             ),
             config_type_dict_by_key=check.dict_param(
                 config_type_dict_by_key,
                 'config_type_dict_by_key',
-                key_type=str,
+                key_type=check.string_types,
                 value_type=ConfigType,
             ),
         )
